@@ -14,17 +14,19 @@ import { SITE } from "./src/config";
 
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
+import vercel from "@astrojs/vercel";
 
-// https://astro.build/config
 export default defineConfig({
   site: SITE.website,
+  adapter: vercel(),
+
   integrations: [sitemap({
     filter: page => SITE.showArchives || !page.endsWith("/archives"),
   }), keystatic(), react(), mdx()],
+
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
     shikiConfig: {
-      // For more themes, visit https://shiki.style/themes
       themes: { light: "min-light", dark: "night-owl" },
       defaultColor: false,
       wrap: false,
@@ -36,6 +38,7 @@ export default defineConfig({
       ],
     },
   },
+
   vite: {
     // eslint-disable-next-line
     // @ts-ignore
@@ -46,10 +49,12 @@ export default defineConfig({
       exclude: ["@resvg/resvg-js"],
     },
   },
+
   image: {
     responsiveStyles: true,
     layout: "constrained",
   },
+
   env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
@@ -59,6 +64,7 @@ export default defineConfig({
       }),
     },
   },
+
   experimental: {
     preserveScriptOrder: true,
   },
