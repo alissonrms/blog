@@ -9,10 +9,10 @@ export const SITE = {
   postPerIndex: 4,
   postPerPage: 4,
   scheduledPostMargin: 15 * 60 * 1000,
-  showArchives: true,
+  showArchives: false,
   showBackButton: true,
   editPost: {
-    enabled: true,
+    enabled: false,
     text: "Editar página",
     url: "https://github.com/alissonrms/blog/edit/main/",
   },

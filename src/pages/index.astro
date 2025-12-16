@@ -24,28 +24,30 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
   <Header />
   <main id="main-content" data-layout="index">
     <section id="hero" class="pt-8 pb-6">
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Backup mental
-      </h1>
-      <a
-        target="_blank"
-        href="/rss.xml"
-        class="inline-block"
-        aria-label="rss feed"
-        title="RSS Feed"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
-        />
-        <span class="sr-only">RSS Feed</span>
-      </a>
+      <div class="flex items-start gap-6 my-4 sm:my-8">
+        <h1 class="inline-block text-4xl font-bold sm:text-5xl">
+          Backup mental
+        </h1>
+        <a
+          target="_blank"
+          href="/rss.xml"
+          class="inline-block"
+          aria-label="rss feed"
+          title="RSS Feed"
+        >
+          <IconRss
+            width={20}
+            height={20}
+            class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
+          />
+          <span class="sr-only">RSS Feed</span>
+        </a>
+      </div>
 
       <p>
         O repositório das minhas experiências. 
-        O Labs é onde eu compilo tudo o que aprendo: desde arquitetura de software, culinária, performance nos esportes, etc.
-        Aqui é literalmente o backup do cérebro de alguém que é viciado em aprender coisas novas.
+        O Labs é onde eu compilo tudo o que aprendo: desde arquitetura de software, culinária, performance em esportes, etc.
+        Aqui é literalmente o backup do cérebro de alguém que é apaixonado por esportes e viciado em aprender coisas novas.
       </p>
       {
         SOCIALS.length > 0 && (
