@@ -41,11 +41,7 @@ Eu não quero que esse artigo fique obsoleto muito rapidamente, portanto não vo
 
 **Link do Repositório**: [https://github.com/alissonrms/blog](https://github.com/alissonrms/blog)
 
-
-
 Aqui vai algumas fotos de como fica o Keystatic e a criação de um novo post:
-
-![](../../assets/images/astro-paper-e-keystatic-criando-um-blog-rapido-e-com-cms/image.png)
 
 ![](../../assets/images/astro-paper-e-keystatic-criando-um-blog-rapido-e-com-cms/image.png)
 
@@ -71,107 +67,13 @@ Tive que fazer algumas adaptações:
 2. Renomear os arquivos antigos de conteúdo.
 3. Ajustar o `keystatic.config.ts` para entender que o título do post é a chave de tudo.
 
-```keystatic.config.ts
-import { config, fields, collection } from '@keystatic/core';
-
-export default config({
-  storage: import.meta.env.PROD
-    ? {
-        kind: 'github',
-        repo: 'alissonrms/blog',
-      }
-    : {
-        kind: 'local',
-      },
-  
-  collections: {
-    posts: collection({
-      label: 'Posts',
-      slugField: 'title',
-      path: 'src/data/blog/*',
-      format: { contentField: 'content' },
-
-      schema: {
-        title: fields.slug({ 
-          name: {
-            label: 'Título',
-            validation: { isRequired: true }
-          },
-          slug: {
-            label: 'Nome do Arquivo (Slug)',
-            description: 'Isso define o nome do arquivo físico .mdx'
-          }
-        }),
-
-        slug: fields.text({
-          label: 'URL Personalizada (postSlug)',
-          description: 'Opcional. Se vazio, o Astro usa o nome do arquivo.',
-        }),
-
-        pubDatetime: fields.datetime({
-          label: 'Data de Publicação',
-          validation: { isRequired: true }
-        }),
-
-        description: fields.text({
-          label: 'Descrição Curta',
-          multiline: true,
-          validation: { length: { min: 10 } }
-        }),
-
-        author: fields.text({
-            label: 'Autor',
-            defaultValue: 'Alishot', 
-        }),
-
-        draft: fields.checkbox({
-            label: 'Rascunho (Draft)',
-            defaultValue: false
-        }),
-        
-        featured: fields.checkbox({
-            label: 'Destaque (Featured)',
-            defaultValue: false
-        }),
-
-        tags: fields.array(
-            fields.text({ label: 'Tag' }),
-            {
-                label: 'Tags',
-                itemLabel: props => props.value,
-            }
-        ),
-
-        ogImage: fields.text({
-            label: 'Caminho da Imagem (OG Image)',
-            description: 'Ex: /assets/images/minha-foto.png',
-        }),
-
-        content: fields.mdx({
-            label: 'Conteúdo',
-            options: {
-                image: {
-                    directory: 'src/assets/images',
-                    publicPath: '../../assets/images/',
-                }
-            }
-        }),
-        
-        modDatetime: fields.datetime({ label: 'Data de Modificação' }),
-        canonicalURL: fields.url({ label: 'URL Canônica' }),
-        hideEditPost: fields.checkbox({ label: 'Esconder botão de editar' }),
-        timezone: fields.text({ label: 'Timezone' }),
-      },
-    }),
-  },
-});
-```
-
 ## Conclusão
 
 Agora o fluxo é simples: abro o painel do Keystatic (/keystatic) pelo próprio site, logo com meu github, escrevo o post ou edito o que quero editar, salvo e pronto, automaticamente o keystatic já dá um  `git push`, a Vercel detecta a mudança e em menos de um minuto o site está atualizado.
 
 Se eu quiser testar alguma coisa antes de ir para o site em produção, posso somente mudar para alguma branch separada no próprio painel do keystatic e abrir um `pull request`, desse modo a Vercel já cria um link para teste com meus updates e eu só preciso dar merge se tudo estiver ok.
+
+![](../../assets/images/astro-paper-e-keystatic-criando-um-blog-rapido-e-com-cms/image.png)
 
 Este é apenas o começo. Pretendo usar este espaço para compartilhar aprendizados sobre código, esportes e vida.
 
